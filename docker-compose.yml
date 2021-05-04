@@ -23,7 +23,7 @@ services:
         environment:
             - POSTGRES_USER=confluence
             - POSTGRES_DB=confluence
-            - POSTGRES_PASSWORD=123456789
+            - POSTGRES_PASSWORD=confluence
         networks:
             - confluencenet
 
