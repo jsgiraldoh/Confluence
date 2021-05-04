@@ -1,0 +1,32 @@
+version: '3.3'
+services:
+    confluence:
+        container_name: confluence
+        image: atlassian/confluence
+        restart: always   
+        volumes:
+            - $PWD/data/your-confluence-home:/var/atlassian/application-data/confluence
+        ports:
+            - '8090:8090'
+            - '8091:8091'
+        networks:
+            - confluencenet
+
+    postgres:
+        container_name: postgres
+        image: postgres
+        restart: always
+        expose:
+         - 5432
+        volumes:
+            - $PWD/pgdata/:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_USER=confluence
+            - POSTGRES_DB=confluence
+            - POSTGRES_PASSWORD=123456789
+        networks:
+            - confluencenet
+
+networks:
+  confluencenet:
+    driver: bridge
